@@ -1,7 +1,8 @@
 """
+Tom Parker
 PLEASE DOCUMENT HERE
 
-Usage: python3 project3.py DATASET.csv
+Usage: python3 project4.py DATASET.csv
 """
 
 import csv, sys, random, math
