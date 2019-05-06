@@ -82,11 +82,16 @@ def accuracy(nn, pairs):
 ### Neural Network code goes here
 
 class NeuralNetwork():
-    def __init__(layerSizes):
+    def __init__(layers):
         # make a bunch of empty nodes connected to next ones with default weights of 1
+        # Dictionary
+        # graph
 
         self.graph = {}
-        
+        for layer in layers:
+            for node in range(len(layer)):
+                self.graph(???????????) = 1
+
 
     def predict_class():
         pass
