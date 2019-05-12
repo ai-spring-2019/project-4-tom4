@@ -87,10 +87,15 @@ class NeuralNetwork():
         # Dictionary
         # graph
 
-        self.graph = {}
-        for layer in layers:
-            for node in range(len(layer)):
-                self.graph(???????????) = 1
+        self.defaultWeight = 1
+        self.graph = [{{}}]
+        self.sizes = layers
+
+        # for i, layer in enumerate(layers):
+        #     for node in range(layer):
+        #         self.graph[i[node] = ()defaultWeight] 
+        loop through each layer
+        and set it dude
 
 
     def predict_class():
