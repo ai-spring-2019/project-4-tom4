@@ -5,7 +5,7 @@ PLEASE DOCUMENT HERE
 Usage: python3 project4.py DATASET.csv
 """
 
-import csv, sys, random, math
+import csv, sys, random, math, numpy as np
 
 def read_data(filename, delimiter=",", has_header=True):
     """Reads datafile using given delimiter. Returns a header and a list of
@@ -94,8 +94,8 @@ class NeuralNetwork():
         # for i, layer in enumerate(layers):
         #     for node in range(layer):
         #         self.graph[i[node] = ()defaultWeight] 
-        loop through each layer
-        and set it dude
+        # loop through each layer
+        # and set it dude
 
 
     def predict_class():
