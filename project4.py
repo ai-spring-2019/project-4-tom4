@@ -82,14 +82,29 @@ def accuracy(nn, pairs):
 ### Neural Network code goes here
 
 class NeuralNetwork():
-    def __init__(layers):
+    def __init__(self, layers):
         # make a bunch of empty nodes connected to next ones with default weights of 1
         # Dictionary
         # graph
 
-        self.defaultWeight = 1
-        self.graph = [{{}}]
-        self.sizes = layers
+        print(layers)
+        
+        self.inputLen = layers[0]
+        self.outputLen = layers[-1]
+
+        self.hiddenLens = layers[1:-1]
+
+        weights = [] # list of lists of dictionaries?
+        weights.append(for neuron in range(inputLen))
+
+
+        # self.input = []
+
+        # weights = random
+
+        # self.defaultWeight = 1
+        # self.graph = [{{}}]
+        # self.sizes = layers
 
         # for i, layer in enumerate(layers):
         #     for node in range(layer):
@@ -98,10 +113,12 @@ class NeuralNetwork():
         # and set it dude
 
 
-    def predict_class():
+    def forward_propagation_prediction(self, training):
         pass
+    # def predict_class():
+    #     pass
 
-    def back_propagation_learning(training):
+    def back_propagation_learning(self, training):
         pass
 
 
@@ -120,7 +137,7 @@ def main():
 
     ### I expect the running of your program will work something like this;
     ### this is not mandatory and you could have something else below entirely.
-    # nn = NeuralNetwork([3, 6, 3])
+    nn = NeuralNetwork([3, 6, 3])
     # nn.back_propagation_learning(training)
 
 if __name__ == "__main__":
