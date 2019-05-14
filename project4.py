@@ -94,11 +94,16 @@ class NeuralNetwork():
                         # So like each list has w i,j
         for i in range(len(layers) - 1): # For each synapse layer (area between two layers)
             self.graph.append([]) # Add synapse layer (matrix)
+
             for row in range(layers[i]): # for each sending neuron
                 self.graph[i].append([]) # Add row to matrix
+
                 for col in range(layers[i + 1]): # for each receiving neuron
                     self.graph[i][row].append([]) # Add column to matrix
                     self.graph[i][row][col] = random.uniform(0, 2) # Add random value
+                
+                self.graph[i][row].insert(0, []) # Add spot for dummy value
+                self.graph[i][row][0] = random.uniform(0, 2)
 
     def __str__(self):
         output = ""
@@ -119,7 +124,25 @@ class NeuralNetwork():
             # print(training[r][0])
             # result = dot_product(row, training[r][0])
             # print(result)
-        for each 
+    
+        for example in training:    
+            #for column in : #(inneuron)
+            #     for each row:
+            #       result += row * input[row]
+            results = []
+            for c in range(self.layers[1]): # For each in-neuron
+                result = 0
+                print(example[0])
+                for r, row in enumerate(self.graph[0]):   # For each out-neuron to that in-neuron
+                    #result += row[c] * training[0][r]   # Add the xi * ai
+                    print(row[c])
+                    print(example[0][r])
+                    print()
+                #print("Dummy: ", example[0][0])
+                #results.append(result)
+            #print(results)
+            quit()
+
 
     # def predict_class():
     #     pass
