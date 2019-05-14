@@ -82,76 +82,38 @@ def accuracy(nn, pairs):
 ### Neural Network code goes here
 
 class NeuralNetwork():
+    """ A neural network """
+
     def __init__(self, layers):
-        # make a bunch of empty nodes connected to next ones with default weights of 1
-        # Dictionary
-        # graph
-
-        # each neuron is a node containing a list/array/vector of all of its outweights
-        # no this sucks
-
-        # self.neurons = set()
-        # self.outNeurons = {}
-        # self.inNeurons = {}
-
-        # self.inputLen = layers[0]
-        # self.outputLen = layers[-1]
-
-        # self.hiddenLens = layers[1:-1]
-
-        #totalSize = sum(layers)
-
-
-        #self.inputLayer = [random.randint(1,4) for neuron in range(self.inputLen)]
-
-
-        # for i in range(sum(layers)):
-        #     self.inputLayer 
-
+        """ Initializes the neural network graph such that it is the right shape and contains
+            random weights """
 
         self.graph = [] # List of 2d lists, where each 2d list is the matrix corresponding to the
                         # synapses (edges) between a given layer. So equivalent to [[[]][[]]]
                         # So like each list has w i,j
         for i in range(len(layers) - 1): # For each synapse layer (area between two layers)
+            self.graph.append([]) # Add synapse layer (matrix)
             for row in range(layers[i]): # for each sending neuron
+                self.graph[i].append([]) # Add row to matrix
                 for col in range(layers[i + 1]): # for each receiving neuron
-                    self.graph[i][row][col] = random.uniform(0, 2)
+                    self.graph[i][row].append([]) # Add column to matrix
+                    self.graph[i][row][col] = random.uniform(0, 2) # Add random value
 
-        print(self.graph)
-
-
-        # self.defaultWeight = 1
-        # self.graph = [{{}}]
-        # self.sizes = layers
-
-        # for i, layer in enumerate(layers):
-        #     for node in range(layer):
-        #         self.graph[i[node] = ()defaultWeight] 
-        # loop through each layer
-        # and set it dude
-
-
-
-        # print(layers)
-        
-        # self.inputLen = layers[0]
-        # self.outputLen = layers[-1]
-
-        # self.hiddenLens = layers[1:-1]
-
-        # weights = [] # list of lists of dictionaries?
-        # weights.append(for neuron in range(inputLen))
-
-
-        # self.input = []
-
-        # weights = random
-
-
-
+    def __str__(self):
+        output = ""
+        for i, layer in enumerate(self.graph):
+            output += ("\n\nSynapse Matrix {}:".format(i))
+            for r, row in enumerate(layer):
+                output += ("\nNeuron {}: ".format(r))
+                for col in row:
+                    output += ('\n          {}'.format(col))
+        return output
 
     def forward_propagate(self, training):
-        pass
+        """ Propagate the inputs forward to compute the outputs """
+        for i, neuron in enumerate(self.graph[0]):
+            neuron = training[i]
+
     # def predict_class():
     #     pass
 
@@ -175,6 +137,7 @@ def main():
     ### I expect the running of your program will work something like this;
     ### this is not mandatory and you could have something else below entirely.
     nn = NeuralNetwork([3, 6, 3])
+    print(nn)
     # nn.back_propagation_learning(training)
 
 if __name__ == "__main__":
