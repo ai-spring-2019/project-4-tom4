@@ -95,15 +95,18 @@ class NeuralNetwork():
         for i in range(len(layers) - 1): # For each synapse layer (area between two layers)
             self.graph.append([]) # Add synapse layer (matrix)
 
-            for row in range(layers[i]): # for each sending neuron
+            for row in range(layers[i] + 1): # for each sending neuron plus the dummy value
                 self.graph[i].append([]) # Add row to matrix
 
                 for col in range(layers[i + 1]): # for each receiving neuron
                     self.graph[i][row].append([]) # Add column to matrix
                     self.graph[i][row][col] = random.uniform(0, 2) # Add random value
                 
-                self.graph[i][row].insert(0, []) # Add spot for dummy value
-                self.graph[i][row][0] = random.uniform(0, 2)
+
+                # print("pre: ", self.graph[i])
+                # self.graph[i][row].insert(0, []) # Add spot for dummy value
+                # self.graph[i][row][0] = random.uniform(0, 2)
+                # print("post: ", self.graph[i])
 
     def __str__(self):
         output = ""
@@ -115,6 +118,15 @@ class NeuralNetwork():
                     output += ('\n          {}'.format(col))
         return output
 
+    ############################################################################
+    #                                                                          #
+    #  REMEMBER THAT LAST LAYER NEEDS TO HAVE DUMMY VAL REMOVED WHEN RELEVANT  #
+    #  Also should be noted that I may have accounted for dummy values twice   #
+    #                                                                          #
+    ############################################################################
+
+
+
     def forward_propagate(self, training):
         """ Propagate the inputs forward to compute the outputs """
         # for i, neuron in enumerate(self.graph[0]):
@@ -124,24 +136,58 @@ class NeuralNetwork():
             # print(training[r][0])
             # result = dot_product(row, training[r][0])
             # print(result)
-    
-        for example in training:    
-            #for column in : #(inneuron)
-            #     for each row:
-            #       result += row * input[row]
-            results = []
-            for c in range(self.layers[1]): # For each in-neuron
-                result = 0
-                print(example[0])
-                for r, row in enumerate(self.graph[0]):   # For each out-neuron to that in-neuron
-                    #result += row[c] * training[0][r]   # Add the xi * ai
-                    print(row[c])
-                    print(example[0][r])
-                    print()
-                #print("Dummy: ", example[0][0])
-                #results.append(result)
+        
+        DUMMY_VALUE = 1.0
+
+        output = []
+        for example in training:  #***** 
+            inflow = example[0]
+        #inflow = training[0][0]
+
+            for i, synapse in enumerate(self.graph): # For each synapse
+                results = []
+                #print("i: ", i)
+                for c in range(self.layers[i+1]): # For each in-neuron
+                    #print("c: ", c)
+                    result = 0
+                    #print("Ex: ", example[0])
+                    for r, row in enumerate(self.graph[i]):   # For each out-neuron to that in-neuron
+                        # print("r: ", r)
+                        # print(row[c])
+                        # print(inflow)
+                        # print(inflow[r])
+                        #print()
+                        result += row[c] * inflow[r]   # Multiply the weight and the input value
+                    if i > 0: # If not the first layer, apply the sigmoid function
+                        result = logistic(result)
+                    results.append(result)
+                    #print("res: ", results)
+                inflow = [DUMMY_VALUE] + results
+                #print("inf: ", inflow)
+
+            #print()
+            #print("Yeet: ", inflow[1:])
+            #print()
+            output.append(inflow[1:]) # Cut off the dummy value if on the output layer
+
+        return output
+        #return inflow[1:] # Return output values without the dummy value
             #print(results)
-            quit()
+
+            # results = []
+            # for c in range(self.layers[1]): # For each in-neuron
+            #     result = 0
+            #     #print("Ex: ", example[0])
+            #     for r, row in enumerate(self.graph[0]):   # For each out-neuron to that in-neuron
+            #         result += row[c] * example[0][r]   # Add the xi * ai
+            #         print(row[c])
+            #         print(example[0][r])
+            #         print()
+            #     results.append(result)
+            # #print(results)
+
+            # for synapses in self.graph[1:]: # Starting from the second set of synapses
+
 
 
     # def predict_class():
@@ -149,6 +195,7 @@ class NeuralNetwork():
 
     def back_propagation_learning(self, training):
         pass
+        # RELEVANCE OF REMOVING DUMMY VAL IN LAST LAYER OCCURS HERE
 
 
 
@@ -168,7 +215,9 @@ def main():
     ### this is not mandatory and you could have something else below entirely.
     nn = NeuralNetwork([3, 6, 3])
     print(nn)
-    nn.forward_propagate(training)
+    forward = nn.forward_propagate(training)
+    print()
+    print(forward)
     # nn.back_propagation_learning(training)
 
 if __name__ == "__main__":
