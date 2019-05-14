@@ -111,8 +111,12 @@ class NeuralNetwork():
 
     def forward_propagate(self, training):
         """ Propagate the inputs forward to compute the outputs """
-        for i, neuron in enumerate(self.graph[0]):
-            neuron = training[i]
+        # for i, neuron in enumerate(self.graph[0]):
+        for r, row in enumerate(self.graph[0]):
+            print(row)
+            print(training[r][0])
+            result = dot_product(row, training[r][0])
+            print(result)
 
     # def predict_class():
     #     pass
@@ -128,7 +132,7 @@ def main():
     pairs = convert_data_to_pairs(data, header)
 
     # Note: add 1.0 to the front of each x vector to account for the dummy input
-    training = [([1.0] + x, y) for (x, y) in pairs]
+    training = [([1.0] + x, y) for (x, y) in pairs] # so this is a list of tuples of lists
 
     # Check out the data:
     for example in training:
@@ -138,6 +142,7 @@ def main():
     ### this is not mandatory and you could have something else below entirely.
     nn = NeuralNetwork([3, 6, 3])
     print(nn)
+    nn.forward_propagate(training)
     # nn.back_propagation_learning(training)
 
 if __name__ == "__main__":
