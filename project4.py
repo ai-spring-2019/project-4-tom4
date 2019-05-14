@@ -88,6 +88,7 @@ class NeuralNetwork():
         """ Initializes the neural network graph such that it is the right shape and contains
             random weights """
 
+        self.layers = layers
         self.graph = [] # List of 2d lists, where each 2d list is the matrix corresponding to the
                         # synapses (edges) between a given layer. So equivalent to [[[]][[]]]
                         # So like each list has w i,j
@@ -112,11 +113,13 @@ class NeuralNetwork():
     def forward_propagate(self, training):
         """ Propagate the inputs forward to compute the outputs """
         # for i, neuron in enumerate(self.graph[0]):
-        for r, row in enumerate(self.graph[0]):
-            print(row)
-            print(training[r][0])
-            result = dot_product(row, training[r][0])
-            print(result)
+        # so each step: for each node in second layer, add together wi * xi for each input 
+        #for r, row in enumerate(self.graph[0]):
+            # print(row)
+            # print(training[r][0])
+            # result = dot_product(row, training[r][0])
+            # print(result)
+        for each 
 
     # def predict_class():
     #     pass
