@@ -109,6 +109,7 @@ class NeuralNetwork():
                 # print("post: ", self.graph[i])
 
     def __str__(self):
+        """ Representation of the neural network for printing """
         output = ""
         for i, layer in enumerate(self.graph):
             output += ("\n\nSynapse Matrix {}:".format(i))
@@ -140,9 +141,9 @@ class NeuralNetwork():
         DUMMY_VALUE = 1.0
 
         output = []
-        for example in training:  #***** 
-            inflow = example[0]
-        #inflow = training[0][0]
+        for example in training: # For each training set
+            inflow = example[0] # Start
+            #print("inf: ", inflow)
 
             for i, synapse in enumerate(self.graph): # For each synapse
                 results = []
@@ -169,8 +170,12 @@ class NeuralNetwork():
             #print("Yeet: ", inflow[1:])
             #print()
             output.append(inflow[1:]) # Cut off the dummy value if on the output layer
+            # print(output)
+            # quit()
 
-        return output
+        return output # A list of lists, where each sublist is of size layers[-1], containing each
+                      # of the output values
+
         #return inflow[1:] # Return output values without the dummy value
             #print(results)
 
@@ -194,8 +199,15 @@ class NeuralNetwork():
     #     pass
 
     def back_propagation_learning(self, training):
-        pass
         # RELEVANCE OF REMOVING DUMMY VAL IN LAST LAYER OCCURS HERE
+        for synapse in self.graph:
+            for row in synapse:
+                for col in row:
+                    for i in range(5): # Make 1000 later
+                        forward_result = self.forward_propagate(training)
+
+                        # Propagate deltas backward from output layer to input layer
+                        
 
 
 
@@ -218,7 +230,7 @@ def main():
     forward = nn.forward_propagate(training)
     print()
     print(forward)
-    # nn.back_propagation_learning(training)
+    nn.back_propagation_learning(training)
 
 if __name__ == "__main__":
     main()
