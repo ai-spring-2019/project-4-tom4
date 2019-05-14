@@ -5,7 +5,7 @@ PLEASE DOCUMENT HERE
 Usage: python3 project4.py DATASET.csv
 """
 
-import csv, sys, random, math, numpy as np
+import csv, sys, random, math
 
 def read_data(filename, delimiter=",", has_header=True):
     """Reads datafile using given delimiter. Returns a header and a list of
@@ -87,20 +87,38 @@ class NeuralNetwork():
         # Dictionary
         # graph
 
-        print(layers)
-        
-        self.inputLen = layers[0]
-        self.outputLen = layers[-1]
+        # each neuron is a node containing a list/array/vector of all of its outweights
+        # no this sucks
 
-        self.hiddenLens = layers[1:-1]
+        # self.neurons = set()
+        # self.outNeurons = {}
+        # self.inNeurons = {}
 
-        weights = [] # list of lists of dictionaries?
-        weights.append(for neuron in range(inputLen))
+        # self.inputLen = layers[0]
+        # self.outputLen = layers[-1]
+
+        # self.hiddenLens = layers[1:-1]
+
+        #totalSize = sum(layers)
 
 
-        # self.input = []
+        #self.inputLayer = [random.randint(1,4) for neuron in range(self.inputLen)]
 
-        # weights = random
+
+        # for i in range(sum(layers)):
+        #     self.inputLayer 
+
+
+        self.graph = [] # List of 2d lists, where each 2d list is the matrix corresponding to the
+                        # synapses (edges) between a given layer. So equivalent to [[[]][[]]]
+                        # So like each list has w i,j
+        for i in range(len(layers) - 1): # For each synapse layer (area between two layers)
+            for row in range(layers[i]): # for each sending neuron
+                for col in range(layers[i + 1]): # for each receiving neuron
+                    self.graph[i][row][col] = random.uniform(0, 2)
+
+        print(self.graph)
+
 
         # self.defaultWeight = 1
         # self.graph = [{{}}]
@@ -113,7 +131,26 @@ class NeuralNetwork():
         # and set it dude
 
 
-    def forward_propagation_prediction(self, training):
+
+        # print(layers)
+        
+        # self.inputLen = layers[0]
+        # self.outputLen = layers[-1]
+
+        # self.hiddenLens = layers[1:-1]
+
+        # weights = [] # list of lists of dictionaries?
+        # weights.append(for neuron in range(inputLen))
+
+
+        # self.input = []
+
+        # weights = random
+
+
+
+
+    def forward_propagate(self, training):
         pass
     # def predict_class():
     #     pass
