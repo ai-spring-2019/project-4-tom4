@@ -18,6 +18,8 @@ the output, so the total length is 6. If the input is "0,0,0", then the output i
 The program takes this dataset and learns how to classify as best it can based on the input,
 ultimately producing a neural network object that as best as it can classifies information of the
 given format. 
+
+Currently only contains forward propagation.
 """
 
 import csv, sys, random, math
@@ -128,14 +130,6 @@ class NeuralNetwork():
                     output += ('\n          {}'.format(col))
         return output
 
-    ############################################################################
-    #                                                                          #
-    #  REMEMBER THAT LAST LAYER NEEDS TO HAVE DUMMY VAL REMOVED WHEN RELEVANT  #
-    #  Also should be noted that I may have accounted for dummy values twice   #
-    #                                                                          #
-    ############################################################################
-
-
 
     def forward_propagate(self, training):
         """ Propagate the inputs forward to compute the outputs """
@@ -169,8 +163,6 @@ class NeuralNetwork():
         forward_result = self.forward_propagate(training)
 
         # Propagate deltas backward from output layer to input layer
-
-
 
 
 
