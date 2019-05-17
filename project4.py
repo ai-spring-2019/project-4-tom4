@@ -116,12 +116,6 @@ class NeuralNetwork():
                 for col in range(layers[i + 1]): # for each receiving neuron
                     self.graph[i][row].append([]) # Add column to matrix
                     self.graph[i][row][col] = random.uniform(0, 2) # Add random value
-                
-
-                # print("pre: ", self.graph[i])
-                # self.graph[i][row].insert(0, []) # Add spot for dummy value
-                # self.graph[i][row][0] = random.uniform(0, 2)
-                # print("post: ", self.graph[i])
 
     def __str__(self):
         """ Representation of the neural network for printing """
@@ -145,80 +139,33 @@ class NeuralNetwork():
 
     def forward_propagate(self, training):
         """ Propagate the inputs forward to compute the outputs """
-        # for i, neuron in enumerate(self.graph[0]):
-        # so each step: for each node in second layer, add together wi * xi for each input 
-        #for r, row in enumerate(self.graph[0]):
-            # print(row)
-            # print(training[r][0])
-            # result = dot_product(row, training[r][0])
-            # print(result)
         
         DUMMY_VALUE = 1.0
 
         output = []
         for example in training: # For each training set
             inflow = example[0] # Start
-            #print("inf: ", inflow)
 
             for i, synapse in enumerate(self.graph): # For each synapse
                 results = []
-                #print("i: ", i)
                 for c in range(self.layers[i+1]): # For each in-neuron
-                    #print("c: ", c)
                     result = 0
-                    #print("Ex: ", example[0])
                     for r, row in enumerate(self.graph[i]):   # For each out-neuron to that in-neuron
-                        # print("r: ", r)
-                        # print(row[c])
-                        # print(inflow)
-                        # print(inflow[r])
-                        #print()
                         result += row[c] * inflow[r]   # Multiply the weight and the input value
                     if i > 0: # If not the first layer, apply the sigmoid function
                         result = logistic(result)
                     results.append(result)
-                    #print("res: ", results)
                 inflow = [DUMMY_VALUE] + results
-                #print("inf: ", inflow)
 
-            #print()
-            #print("Yeet: ", inflow[1:])
-            #print()
             output.append(inflow[1:]) # Cut off the dummy value if on the output layer
-            # print(output)
-            # quit()
 
         return output # A list of lists, where each sublist is of size layers[-1], containing each
                       # of the output values
-
-        #return inflow[1:] # Return output values without the dummy value
-            #print(results)
-
-            # results = []
-            # for c in range(self.layers[1]): # For each in-neuron
-            #     result = 0
-            #     #print("Ex: ", example[0])
-            #     for r, row in enumerate(self.graph[0]):   # For each out-neuron to that in-neuron
-            #         result += row[c] * example[0][r]   # Add the xi * ai
-            #         print(row[c])
-            #         print(example[0][r])
-            #         print()
-            #     results.append(result)
-            # #print(results)
-
-            # for synapses in self.graph[1:]: # Starting from the second set of synapses
-
-
 
     # def predict_class():
     #     pass
 
     def back_propagation_learning(self, training):
-        # RELEVANCE OF REMOVING DUMMY VAL IN LAST LAYER OCCURS HERE
-        # for synapse in self.graph:
-        #     for row in synapse:
-        #         for col in row:
-        #             for i in range(5): # Make 1000 later
         forward_result = self.forward_propagate(training)
 
         # Propagate deltas backward from output layer to input layer
