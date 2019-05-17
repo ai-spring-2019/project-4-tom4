@@ -1,8 +1,23 @@
 """
 Tom Parker
-PLEASE DOCUMENT HERE
-
 Usage: python3 project4.py DATASET.csv
+
+Contains a neural network implementation with forward propagation for prediction and
+back propagation for learning weights and repeatedly makes neural networks learning how to classify
+based on the given data.
+
+Pass the program a .csv file as the dataset.
+This dataset must be formatted such that the first line contains information such that "target"
+refers to the output layer and anything else refers to the input layer. The form is:
+    x1,x2,...,xn,target1,target2...,targetm. The x can be something else or nothing. The number
+    label is also unnecessary.
+The following lines contain examples of inputs with their correct outputs. For example,
+a 3-bit incrementer, the second line is, "0,0,0,0,0,1". The input is of size 3 and so is
+the output, so the total length is 6. If the input is "0,0,0", then the output is "0,0,1".
+
+The program takes this dataset and learns how to classify as best it can based on the input,
+ultimately producing a neural network object that as best as it can classifies information of the
+given format. 
 """
 
 import csv, sys, random, math
@@ -207,7 +222,7 @@ class NeuralNetwork():
         forward_result = self.forward_propagate(training)
 
         # Propagate deltas backward from output layer to input layer
-        
+
 
 
 
