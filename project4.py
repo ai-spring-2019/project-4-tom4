@@ -200,14 +200,15 @@ class NeuralNetwork():
 
     def back_propagation_learning(self, training):
         # RELEVANCE OF REMOVING DUMMY VAL IN LAST LAYER OCCURS HERE
-        for synapse in self.graph:
-            for row in synapse:
-                for col in row:
-                    for i in range(5): # Make 1000 later
-                        forward_result = self.forward_propagate(training)
+        # for synapse in self.graph:
+        #     for row in synapse:
+        #         for col in row:
+        #             for i in range(5): # Make 1000 later
+        forward_result = self.forward_propagate(training)
 
-                        # Propagate deltas backward from output layer to input layer
-                        
+        # Propagate deltas backward from output layer to input layer
+        
+
 
 
 
